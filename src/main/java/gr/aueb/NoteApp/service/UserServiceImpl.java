@@ -107,8 +107,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDto login(String email, String password) throws EntityNotFoundException {
         try {
-            User user = userRepository.findByEmail(email)
-                    .orElseThrow(() -> new EntityNotFoundException(User.class, null));
+            User user = userRepository.findByEmail(email);
             if (user.getPassword().equals(password)) {
                 log.info("User logged in: " + user);
                 return this.UserToDto(user);

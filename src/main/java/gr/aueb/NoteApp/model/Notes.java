@@ -20,7 +20,7 @@ public class Notes {
 
     private String title;
 
-    private String content;
+    private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
