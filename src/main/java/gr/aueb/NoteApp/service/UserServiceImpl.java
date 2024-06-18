@@ -23,7 +23,6 @@ public class UserServiceImpl implements IUserService {
     private final UserValidator userValidator;
 
 
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository, UserValidator userValidator) {
         this.userRepository = userRepository;
@@ -53,12 +52,8 @@ public class UserServiceImpl implements IUserService {
 
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new EntityNotFoundException(User.class, userId));
-
-            // Update user fields
             user.setUsername(userDto.getUsername());
             user.setEmail(userDto.getEmail());
-            // Update other fields as needed
-
             User updatedUser = userRepository.save(user);
             log.info("User updated: {}", updatedUser);
             return UserToDto(updatedUser);
@@ -108,24 +103,24 @@ public class UserServiceImpl implements IUserService {
     public UserDto login(String email, String password) throws EntityNotFoundException {
         try {
             User user = userRepository.findByEmailAndPassword(email, password);
-            if (user.getPassword().equals(password)) {
-                log.info("User logged in: {}", user);
-                return this.UserToDto(user);
-            } else {
+            if (user == null) {
                 throw new EntityNotFoundException(User.class, null);
             }
+            log.info("User logged in: {}", user);
+            return this.UserToDto(user);
         } catch (Exception e) {
             log.error("Error while logging in", e);
             throw new EntityNotFoundException(User.class, null);
         }
     }
 
+
     public User DtoToUser(UserDto userDto) {
         User user = new User();
         user.setId(userDto.getId());
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword()); // Encode the password
+        user.setPassword(userDto.getPassword());
         return user;
     }
 

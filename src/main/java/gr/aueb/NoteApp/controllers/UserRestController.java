@@ -111,12 +111,11 @@ public class UserRestController {
     })
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody LoginDto loginDto) {
-        UserDto userDto = new UserDto();
         try {
-            userDto = this.userService.login(loginDto.getEmail(), loginDto.getPassword());
-           return new ResponseEntity<>(userDto, HttpStatus.OK);
+            UserDto userDto = this.userService.login(loginDto.getEmail(), loginDto.getPassword());
+           return ResponseEntity.ok(userDto);
         } catch (Exception e) {
-            return new ResponseEntity<>(userDto, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
     }
 }
