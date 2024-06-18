@@ -18,6 +18,8 @@ public class UserDto {
 
     @NotBlank(message = "Password cannot be blank")
     @Pattern(regexp = "^.{4,}$", message = "Password must contain at least 4 characters.")
+//    @Pattern(regexp = "/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/",
+//            message = "Password must be 8+ characters with uppercase, lowercase, and a number or special character. Please retry")
     private String password;
 
     @NotBlank(message = "Email cannot be blank")
