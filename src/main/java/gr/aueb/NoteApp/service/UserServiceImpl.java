@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
 
             User user = DtoToUser(userDto);
             userRepository.save(user);
-            log.info("User created: " + user);
+            log.info("User created: {}", user);
             return UserToDto(user);
         } catch (Exception e) {
             log.error("Error while saving user", e);
@@ -60,7 +60,7 @@ public class UserServiceImpl implements IUserService {
             // Update other fields as needed
 
             User updatedUser = userRepository.save(user);
-            log.info("User updated: " + updatedUser);
+            log.info("User updated: {}", updatedUser);
             return UserToDto(updatedUser);
         } catch (Exception e) {
             log.error("Error while updating user", e);
@@ -73,7 +73,7 @@ public class UserServiceImpl implements IUserService {
     public void deleteUser(Long id) throws EntityNotFoundException {
         try {
             userRepository.deleteById(id);
-            log.info("User deleted: " + id);
+            log.info("User deleted: {}", id);
         } catch (Exception e) {
             log.error("Error while deleting user", e);
             throw new EntityNotFoundException(User.class, id);
@@ -84,7 +84,7 @@ public class UserServiceImpl implements IUserService {
     public UserDto getUser(Long id) throws EntityNotFoundException {
         try {
             User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class, id));
-            log.info("User retrieved: " + user);
+            log.info("User retrieved: {}", user);
             return this.UserToDto(user);
         } catch (Exception e) {
             log.error("Error while getting user", e);
@@ -96,7 +96,7 @@ public class UserServiceImpl implements IUserService {
     public List<UserDto> getAllUsers() throws EntityNotFoundException {
         try {
             List<User> users = userRepository.findAll();
-            log.info("Users retrieved: " + users);
+            log.info("Users retrieved: {}", users);
             return users.stream().map(this::UserToDto).toList();
         } catch (Exception e) {
             log.error("Error while getting all users", e);
@@ -107,9 +107,9 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDto login(String email, String password) throws EntityNotFoundException {
         try {
-            User user = userRepository.findByEmail(email);
+            User user = userRepository.findByEmailAndPassword(email, password);
             if (user.getPassword().equals(password)) {
-                log.info("User logged in: " + user);
+                log.info("User logged in: {}", user);
                 return this.UserToDto(user);
             } else {
                 throw new EntityNotFoundException(User.class, null);

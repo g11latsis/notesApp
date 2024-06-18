@@ -114,9 +114,9 @@ public class UserRestController {
         UserDto userDto = new UserDto();
         try {
             userDto = this.userService.login(loginDto.getEmail(), loginDto.getPassword());
-            return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+           return new ResponseEntity<>(userDto, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<UserDto>(userDto, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(userDto, HttpStatus.UNAUTHORIZED);
         }
     }
 }

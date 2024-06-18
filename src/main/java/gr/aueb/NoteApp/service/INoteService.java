@@ -11,5 +11,5 @@ public interface INoteService {
     void deleteNote(Long notesId) throws EntityNotFoundException;
     NotesDto getNote(Long notesId) throws EntityNotFoundException;
     List<NotesDto> getAllNotes()  throws EntityNotFoundException;
-    List<NotesDto> getNotesByUser(String userId) throws EntityNotFoundException;
+    List<NotesDto> getNotesByUserUsername(String userId) throws EntityNotFoundException;
 }

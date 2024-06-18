@@ -22,6 +22,7 @@ public class NoteServiceImpl implements INoteService {
     private final NotesRepository notesRepository;
     private final UserRepository userRepository;
 
+
     @Autowired
     public NoteServiceImpl(NotesRepository notesRepository, UserRepository userRepository) {
         this.notesRepository = notesRepository;
@@ -81,17 +82,15 @@ public class NoteServiceImpl implements INoteService {
     }
 
     @Override
-    public List<NotesDto> getNotesByUser(String userId) throws EntityNotFoundException {
+    public List<NotesDto> getNotesByUserUsername(String username) throws EntityNotFoundException {
         try {
-            User user = userRepository.findById(Long.parseLong(userId))
-                    .orElseThrow(() -> new EntityNotFoundException(User.class, Long.parseLong(userId)));
-            List<Notes> notes = notesRepository.findByUser(user);
-            List<NotesDto> allNotes= notes.stream().map((note)->this.NotesToDto(note)).collect(Collectors.toList());
+            List<Notes> notes = notesRepository.findByUserUsername(username);
+            List<NotesDto> allNotes= notes.stream().map(this::NotesToDto).collect(Collectors.toList());
             log.info("Notes retrieved: " + notes);
             return allNotes;
         } catch (Exception e) {
             log.error("Error while getting notes", e);
-            throw new EntityNotFoundException(User.class, Long.parseLong(userId));
+            throw new EntityNotFoundException(Notes.class, 0L);
         }
     }
 
@@ -120,6 +119,7 @@ public class NoteServiceImpl implements INoteService {
             throw new EntityNotFoundException(Notes.class, 0L);
         }
     }
+
 
 
     public Notes DtoToNotes(NotesDto notesDto) {
@@ -157,4 +157,6 @@ public class NoteServiceImpl implements INoteService {
         userDto.setPassword(user.getPassword());
         return userDto;
     }
+
+
 }
