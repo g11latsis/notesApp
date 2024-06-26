@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
 
-const Home = () => {
+const Home = ({user,handleLogout}) => {
     return (
         <div>
-            <h2>Welcome to the Home Page!</h2>
+            <Header isLoggedIn={true} user={user} handleLogout={handleLogout} />
+            <h1>Welcome to the Home Page</h1>
         </div>
     );
 };

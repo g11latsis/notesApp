@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import '../style.css';
 
 const Register = () => {
@@ -15,12 +14,9 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
-
         e.preventDefault();
         setError('');
         setSuccess('');
-
-        
 
         if (password !== confirmPassword) {
             setError('Passwords do not match');
@@ -28,26 +24,26 @@ const Register = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/api/user/', {
+            const response = await axios.post('http://localhost:8080/api/user/register', {
                 username,
                 email,
                 password
             });
 
-            if (response.status === 201) {
-                setSuccess('Registration successful! Please login.');
-                navigate('/login');
+            if (response.status === 200) {
+                setSuccess('Registration successful!');
+                navigate('/login'); // Redirect to login
             }
         } catch (err) {
-            setError('Registration failed. Please try again.');
+            setError('Registration failed');
         }
     };
 
     return (
         <div className="login-background">
-            <Container className="login-shape w-25">
+            <Container>
                 <Row className="justify-content-md-center">
-                    <Col md="10" className="d-flex flex-column">
+                    <Col xs={12} sm={10} md={6} lg={4} className="d-flex flex-column login-shape">
                         <h2 className="text-center mb-4">Register</h2>
                         <Form onSubmit={handleRegister}>
                             <Form.Group controlId="formBasicName" className="mb-3">
