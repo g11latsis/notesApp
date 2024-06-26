@@ -107,6 +107,23 @@ public class NoteServiceImpl implements INoteService {
         }
     }
 
+
+    @Override
+    public List<NotesDto> getNotesByUserId(Long userId) throws EntityNotFoundException {
+        try {
+                User user = userRepository.findById(userId)
+                        .orElseThrow(() -> new EntityNotFoundException(User.class, userId));
+           List<Notes> notes = notesRepository.findByUser(user);
+                List<NotesDto> allNotes= notes.stream().map(this::NotesToDto).collect(Collectors.toList());
+                log.info("Notes retrieved: " + notes);
+                return allNotes;
+        } catch (Exception e) {
+            log.error("Error while getting notes", e);
+            throw new EntityNotFoundException(Notes.class, 0L);
+        }
+    }
+
+
     @Override
     public List<NotesDto> getAllNotes() throws EntityNotFoundException {
         try {

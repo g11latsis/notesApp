@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,33 +68,48 @@ public class NotesRestController {
         }
     }
 
-    @Operation(summary = "Get all notes by username")
+//    @Operation(summary = "Get all notes by username")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Notes found"),
+//            @ApiResponse(responseCode = "404", description = "Notes not found")
+//    })
+//    @GetMapping("/user/{username}")
+//    public ResponseEntity<List<NotesDto>> getAllNotesByUsername(@PathVariable String username) {
+//        try {
+//            List<NotesDto> notes = noteService.getNotesByUserUsername(username);
+//            return ResponseEntity.ok(notes);
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+//
+//
+//    @Operation(summary = "Get a note by id")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Note found"),
+//            @ApiResponse(responseCode = "404", description = "Note not found")
+//    })
+//    @GetMapping("/{notesId}")
+//    public ResponseEntity<NotesDto> getNote(@PathVariable Long notesId) {
+//        try {
+//            return ResponseEntity.ok(noteService.getNote(notesId));
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//    }
+
+    @Operation(summary = "Get all notes by user id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Notes found"),
             @ApiResponse(responseCode = "404", description = "Notes not found")
     })
-    @GetMapping("/user/{username}")
-    public ResponseEntity<List<NotesDto>> getAllNotesByUsername(@PathVariable String username) {
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<NotesDto>> getAllNotesByUserId(@PathVariable Long userId) {
         try {
-            List<NotesDto> notes = noteService.getNotesByUserUsername(username);
-            return ResponseEntity.ok(notes);
+           List<NotesDto> Note = this.noteService.getNotesByUserId(userId);
+            return new ResponseEntity<List<NotesDto>>(Note, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
-        }
-    }
-
-
-    @Operation(summary = "Get a note by id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Note found"),
-            @ApiResponse(responseCode = "404", description = "Note not found")
-    })
-    @GetMapping("/{notesId}")
-    public ResponseEntity<NotesDto> getNote(@PathVariable Long notesId) {
-        try {
-            return ResponseEntity.ok(noteService.getNote(notesId));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
         }
     }
 
