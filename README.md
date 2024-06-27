@@ -70,7 +70,7 @@ git clone <repository_url>
 
 Navigate to the project directory:
 ```bash
-cd noteapp-frontend
+cd NoteApp/frontend/
 
 ```
 
