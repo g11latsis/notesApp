@@ -6,6 +6,7 @@ import gr.aueb.NoteApp.model.Notes;
 import gr.aueb.NoteApp.model.User;
 import gr.aueb.NoteApp.repositories.UserRepository;
 import gr.aueb.NoteApp.service.exceptions.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,13 +72,15 @@ public class NoteServiceImpl implements INoteService {
         }
     }
 
+
     @Override
-    public void deleteNote(Long notesId) throws EntityNotFoundException {
+    public void deleteNote(Long id) throws EntityNotFoundException {
         try {
-            notesRepository.deleteById(notesId);
+            notesRepository.deleteById(id);
+            log.info("Note deleted: {}", id);
         } catch (Exception e) {
             log.error("Error while deleting note", e);
-            throw new EntityNotFoundException(Notes.class, notesId);
+            throw new EntityNotFoundException(Notes.class, id);
         }
     }
 
@@ -95,15 +98,15 @@ public class NoteServiceImpl implements INoteService {
     }
 
     @Override
-    public NotesDto getNote(Long notesId) throws EntityNotFoundException {
+    public NotesDto getNote(Long id) throws EntityNotFoundException {
         try {
-            Notes notes = notesRepository.findById(notesId)
-                    .orElseThrow(() -> new EntityNotFoundException(Notes.class, notesId));
-            log.info("Note retrieved: " + notes);
+            Notes notes = notesRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException(Notes.class, id));
+            log.info("Note retrieved: {}", notes);
             return this.NotesToDto(notes);
         } catch (Exception e) {
             log.error("Error while getting note", e);
-            throw new EntityNotFoundException(Notes.class, notesId);
+            throw new EntityNotFoundException(Notes.class, id);
         }
     }
 

@@ -6,7 +6,6 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
   return (
     <Navbar bg="light" expand="lg" className="header-navbar">
       <Navbar.Brand href="#">Note App</Navbar.Brand>
-      <Button variant="success" className="ml-2">Add Note</Button>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto d-flex justify-content-between w-100">
@@ -16,7 +15,7 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
           <div className="nav-right">
             {isLoggedIn ? (
               <div className="d-flex align-items-center gap-4">
-                <Navbar.Text className="mr-3">Signed in as: {user}</Navbar.Text>
+                <Navbar.Text className="mr-3">Welcome: {user}</Navbar.Text>
                 <Button variant="outline-danger" onClick={handleLogout}>Logout</Button>
               </div>
             ) : (

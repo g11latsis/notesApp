@@ -1,6 +1,7 @@
 package gr.aueb.NoteApp.controllers;
 
 import gr.aueb.NoteApp.dto.NotesDto;
+import gr.aueb.NoteApp.model.Notes;
 import gr.aueb.NoteApp.service.INoteService;
 import gr.aueb.NoteApp.service.exceptions.EntityNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,12 +60,13 @@ public class NotesRestController {
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
     @DeleteMapping("/{notesId}")
-    public ResponseEntity<Void> deleteNote(@PathVariable Long notesId) {
+    public ResponseEntity<NotesDto> deleteNote(@PathVariable Long notesId) {
         try {
+            NotesDto notesDto = noteService.getNote(notesId);
             noteService.deleteNote(notesId);
-            return ResponseEntity.ok().build();
+            return new ResponseEntity<>(notesDto, HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

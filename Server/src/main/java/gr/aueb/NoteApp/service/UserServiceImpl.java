@@ -106,7 +106,7 @@ public class UserServiceImpl implements IUserService {
             if (user == null) {
                 throw new EntityNotFoundException(User.class, null);
             }
-            log.info("User logged in: {}", user);
+            log.info("User logged in: {}", email);
             return this.UserToDto(user);
         } catch (Exception e) {
             log.error("Error while logging in", e);

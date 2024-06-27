@@ -24,7 +24,6 @@ function App() {
         <Routes>
           <Route exact path="/login" element={<Login onLogin={handleLogin}/>} />
           <Route exact path='/register' element={<Register />} />
-          {/* <Route exact path="/home" element={<Home />} /> */}
           <Route path="/home" element={isLoggedIn ? <Home user={user} handleLogout={handleLogout} /> : <Navigate to="/login" />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
