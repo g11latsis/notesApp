@@ -24,8 +24,8 @@ const Login = ({ onLogin }) => {
 
             if (response.status === 200) {
                 setSuccess('Login successful!');
-                onLogin(email); // Call the onLogin function to update the state in App
-                navigate('/home'); // Redirect to home
+                onLogin(email); 
+                navigate('/home'); 
             }
         } catch (err) {
             setError('Invalid email or password');

@@ -20,3 +20,16 @@
         padding: 1rem;
     }
 }
+
+.header-navbar {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.nav-left {
+    flex-grow: 1;
+}
+
+.nav-right {
+    flex-shrink: 0;
+}

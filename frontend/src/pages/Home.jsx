@@ -5,7 +5,6 @@ const Home = ({user,handleLogout}) => {
     return (
         <div>
             <Header isLoggedIn={true} user={user} handleLogout={handleLogout} />
-            <h1>Welcome to the Home Page</h1>
         </div>
     );
 };
