@@ -49,6 +49,13 @@ Once the application starts, verify that the backend server is running:
 Open a web browser and go to http://localhost:8080 (assuming default Spring Boot configuration).
 If configured, you may see a default landing page or a message indicating the server is running.
 
+6. Access Swagger Documentation
+Once the application starts, you can access the Swagger documentation:
+
+Open a web browser and go to http://localhost:8080/swagger-ui.html.
+
+This URL should display the Swagger UI interface where you can explore and test the available API endpoints interactively.
+
 # NoteApp Frontend
 
 This is the frontend application for the NoteApp project. The application is built using React and communicates with a backend API to manage user notes.
@@ -86,9 +93,4 @@ Start the development server
 npm start
 ```
 
-5. Access Swagger Documentation
-Once the application starts, you can access the Swagger documentation:
 
-Open a web browser and go to http://localhost:8080/swagger-ui.html.
-
-This URL should display the Swagger UI interface where you can explore and test the available API endpoints interactively.
