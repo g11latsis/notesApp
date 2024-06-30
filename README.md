@@ -49,9 +49,48 @@ Once the application starts, verify that the backend server is running:
 Open a web browser and go to http://localhost:8080 (assuming default Spring Boot configuration).
 If configured, you may see a default landing page or a message indicating the server is running.
 
-5. Access Swagger Documentation
+6. Access Swagger Documentation
 Once the application starts, you can access the Swagger documentation:
 
 Open a web browser and go to http://localhost:8080/swagger-ui.html.
 
 This URL should display the Swagger UI interface where you can explore and test the available API endpoints interactively.
+
+# NoteApp Frontend
+
+This is the frontend application for the NoteApp project. The application is built using React and communicates with a backend API to manage user notes.
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+- **Node.js**: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
+- **npm**: npm is included with Node.js. You can verify the installation by running `npm -v`.
+
+## Getting Started
+
+Follow these instructions to set up and run the project on your local machine.
+
+ Clone the repository:
+```bash
+git clone <repository_url>
+```
+
+Navigate to the project directory:
+```bash
+cd NoteApp/frontend/
+
+```
+
+## Install Dependencies
+Install the necessary dependencies using npm:
+```bash
+npm install
+```
+
+## Running the application
+Start the development server
+```bash
+npm start
+```
+
+
