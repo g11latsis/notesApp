@@ -30,9 +30,16 @@ const Register = () => {
                 password
             });
 
-            if (response.status === 200) {
+            if (response.status === 201 || response.status === 200) {
                 setSuccess('Registration successful!');
-                navigate('/login'); // Redirect to login
+                setUsername('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                // Navigate to the login page after a short delay
+                setTimeout(() => {
+                    navigate('/login');
+                }, 3000); // 2 seconds delay
             }
         } catch (err) {
             setError('Registration failed');

@@ -23,12 +23,19 @@ const NoteModal = ({ show, handleClose, handleSave, note }) => {
     }
 
     handleSave({ ...note, title, description });
+    resetForm();
     handleClose();
   };
 
   const handleModalClose = () => {
     setErrorMessage(''); // Clear error message
     handleClose();
+  };
+
+  const resetForm = () => {
+    setTitle('');
+    setDescription('');
+    setErrorMessage('');
   };
 
   return (

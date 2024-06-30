@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import '../style.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = ({ isLoggedIn, user, handleLogout }) => {
   return (
