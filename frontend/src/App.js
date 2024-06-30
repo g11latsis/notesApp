@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState('');

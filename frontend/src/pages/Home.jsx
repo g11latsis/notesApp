@@ -5,6 +5,8 @@ import NoteModal from "../components/NoteModal";
 import Header from "../components/Header";
 import axios from "axios";
 import DeleteModal from "../components/DeleteModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Home = ({ user, handleLogout }) => {
   const [notes, setNotes] = useState([]);
@@ -91,6 +93,7 @@ const Home = ({ user, handleLogout }) => {
       />
       <Container className="mt-3">
         <Button variant="success" onClick={handleAdd} className="mb-3">
+          <FontAwesomeIcon icon={faPlus} className="me-2" />
           Add Note
         </Button>
         <Row>
